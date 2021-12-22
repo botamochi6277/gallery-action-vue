@@ -52,6 +52,7 @@
       </li>
     </ul>
     <h3>{{ gallery_name }}</h3>
+    <p>{{ images }}</p>
     <ul class="category-list">
       <!-- <li> <img :src="images[0].src"> </li> -->
       <li v-for="image in images" :key="image.index">
@@ -78,7 +79,7 @@ export default {
   mounted: function () {
     axios
       .get("/image_list.json")
-      .then((response) => (this.images = response.data));
+      .then((response) => (this.images = response.data.images));
 
     console.log(this.images);
     // for (let index = 0; index < self.images.length; index++) {
