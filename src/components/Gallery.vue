@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="gallery">
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
@@ -52,10 +52,19 @@
       </li>
     </ul>
     <h3>{{ gallery_name }}</h3>
-    <p>{{ images }}</p>
+    <div class="category-nav">
+      <label> <input type="radio" v-model="category" value="" /> All </label>
+      <label>
+        <input type="radio" v-model="category" value="Package" /> Package
+      </label>
+      <label>
+        <input type="radio" v-model="category" value="Symbol" /> Symbol
+      </label>
+    </div>
+    <!-- <p>{{ images }}</p> -->
     <ul class="category-list">
       <!-- <li> <img :src="images[0].src"> </li> -->
-      <li v-for="image in images" :key="image.index">
+      <li v-for="image in filterByCategory" :key="image.index">
         <img :src="image.src" :alt="image.index" />
       </li>
     </ul>
@@ -66,13 +75,14 @@
 import axios from "axios";
 
 export default {
-  name: "HelloWorld",
+  name: "Gallery",
   props: {
     msg: String,
     gallery_name: String,
   },
   data() {
     return {
+      category: "",
       images: [],
     };
   },
@@ -80,6 +90,13 @@ export default {
     axios
       .get("/image_list.json")
       .then((response) => (this.images = response.data.images));
+  },
+  computed: {
+    filterByCategory: function () {
+      return this.images.filter(
+        (image) => !image.category.indexOf(this.category)
+      );
+    },
   },
 };
 </script>
