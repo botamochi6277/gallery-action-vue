@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "HelloWorld",
   props: {
@@ -70,12 +72,20 @@ export default {
   },
   data() {
     return {
-      images: [
-        { index: 0, src: require("@/assets/imgs/00.png"), category: "Package" },
-        { index: 1, src: require("@/assets/imgs/01.png"), category: "Package" },
-        { index: 2, src: require("@/assets/imgs/02.png"), category: "Symbol" },
-      ],
+      images: [],
     };
+  },
+  mounted: function () {
+    axios
+      .get("/image_list.json")
+      .then((response) => (this.images = response.data));
+
+    console.log(this.images);
+    // for (let index = 0; index < self.images.length; index++) {
+    //   const img = self.images[index];
+    //   let src = img.src;
+    //   img.src = require(`@/assets/${src}`);
+    // }
   },
 };
 </script>
