@@ -1,0 +1,16 @@
+name: 'Gallery vue'
+description: 'make gallery page with vuejs'
+author: 'botamochi6277'
+branding:
+  icon: 'image'
+  color: 'green'
+inputs:
+  dir:
+    description: 'target directory containing images'
+    default: 'imgs'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dir }}
