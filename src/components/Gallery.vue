@@ -10,12 +10,16 @@
     <v-container class="grey lighten-5">
       <h1>{{ msg }}</h1>
       <h3>{{ gallery_name }}</h3>
+
       <div class="category-nav">
-        <label> <input type="radio" v-model="category" value="" /> All </label>
-        <label v-for="cat in categories" :key="cat.index">
-          <input type="radio" v-model="category" :value="cat" />
-          {{ cat }}
-        </label>
+        <v-radio-group v-model="category">
+          <v-row no-gutters :justify="`start`" id="category-nav">
+            <v-col md="3"><v-radio :label="`All`" value="All"></v-radio></v-col>
+            <v-col md="3" v-for="cat in categories" :key="cat.index"
+              ><v-radio :label="`${cat}`" :value="cat"></v-radio
+            ></v-col>
+          </v-row>
+        </v-radio-group>
       </div>
       <v-row no-gutters>
         <v-col
@@ -75,6 +79,10 @@ export default {
   },
   computed: {
     filterByCategory: function () {
+      console.log(this.category);
+      if (this.category === "All") {
+        return this.images;
+      }
       return this.images.filter(
         (image) => !image.category.indexOf(this.category)
       );
