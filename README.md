@@ -1,32 +1,8 @@
 # gallery-action-vue
 
-## Project setup
+![build workflow](https://github.com/botamochi6277/gallery-action-vue/actions/workflows/build.yml/badge.svg)
 
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Make Gallery Pages with GitHub Actions
 
 ## References
 
