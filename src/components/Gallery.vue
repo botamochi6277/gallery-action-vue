@@ -30,6 +30,7 @@
         >
           <v-card class="pa-2" outlined tile>
             <v-img :src="image.src" />
+            <v-card-title>{{ image.name }}</v-card-title>
           </v-card>
         </v-col>
       </v-row>
