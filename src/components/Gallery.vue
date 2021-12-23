@@ -1,73 +1,37 @@
 <template>
   <div class="gallery">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>{{ gallery_name }}</h3>
-    <div class="category-nav">
-      <label> <input type="radio" v-model="category" value="" /> All </label>
-      <label>
-        <input type="radio" v-model="category" value="Package" /> Package
-      </label>
-      <label>
-        <input type="radio" v-model="category" value="Symbol" /> Symbol
-      </label>
-    </div>
     <!-- <p>{{ images }}</p> -->
-    <ul class="category-list">
-      <!-- <li> <img :src="images[0].src"> </li> -->
+    <!-- <ul class="category-list">
+
       <li v-for="image in filterByCategory" :key="image.index">
         <img :src="image.src" :alt="image.index" />
       </li>
-    </ul>
+    </ul> -->
+    <v-container class="grey lighten-5">
+      <h1>{{ msg }}</h1>
+      <h3>{{ gallery_name }}</h3>
+      <div class="category-nav">
+        <label> <input type="radio" v-model="category" value="" /> All </label>
+        <label>
+          <input type="radio" v-model="category" value="Package" /> Package
+        </label>
+        <label>
+          <input type="radio" v-model="category" value="Symbol" /> Symbol
+        </label>
+      </div>
+      <v-row no-gutters>
+        <v-col
+          v-for="image in filterByCategory"
+          :key="image.index"
+          cols="12"
+          sm="4"
+        >
+          <v-card class="pa-2" outlined tile>
+            <v-img :src="image.src" :alt="image.index" />
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -88,7 +52,7 @@ export default {
   },
   mounted: function () {
     axios
-      .get("/image_list.json")
+      .get("/imgs/image_list.json")
       .then((response) => (this.images = response.data.images));
   },
   computed: {
