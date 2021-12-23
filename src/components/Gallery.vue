@@ -8,8 +8,7 @@
       </li>
     </ul> -->
     <v-container class="grey lighten-5">
-      <h1>{{ msg }}</h1>
-      <h3>{{ gallery_name }}</h3>
+      <h2>{{ gallery_name }}</h2>
 
       <div class="category-nav">
         <v-radio-group v-model="category">
@@ -55,7 +54,6 @@ function uniq(array) {
 export default {
   name: "Gallery",
   props: {
-    msg: String,
     gallery_name: String,
   },
   data() {
