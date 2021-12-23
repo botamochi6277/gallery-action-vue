@@ -30,7 +30,10 @@
         >
           <v-card class="pa-2" outlined tile>
             <v-img :src="image.src" />
-            <v-card-title>{{ image.name }}</v-card-title>
+            <v-card-text>
+              <h2 class="text-h6 primary--text">{{ image.name }}</h2>
+              {{ image.category }}
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -80,7 +83,6 @@ export default {
   },
   computed: {
     filterByCategory: function () {
-      console.log(this.category);
       if (this.category === "All") {
         return this.images;
       }
