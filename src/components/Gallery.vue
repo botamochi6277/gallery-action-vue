@@ -12,11 +12,9 @@
       <h3>{{ gallery_name }}</h3>
       <div class="category-nav">
         <label> <input type="radio" v-model="category" value="" /> All </label>
-        <label>
-          <input type="radio" v-model="category" value="Package" /> Package
-        </label>
-        <label>
-          <input type="radio" v-model="category" value="Symbol" /> Symbol
+        <label v-for="cat in categories" :key="cat.index">
+          <input type="radio" v-model="category" :value="cat" />
+          {{ cat }}
         </label>
       </div>
       <v-row no-gutters>
@@ -27,7 +25,7 @@
           sm="4"
         >
           <v-card class="pa-2" outlined tile>
-            <v-img :src="image.src" :alt="image.index" />
+            <v-img :src="image.src" />
           </v-card>
         </v-col>
       </v-row>
@@ -38,6 +36,14 @@
 <script>
 import axios from "axios";
 
+function uniq(array) {
+  const uniquedArray = [];
+  for (const elem of array) {
+    if (uniquedArray.indexOf(elem) < 0) uniquedArray.push(elem);
+  }
+  return uniquedArray;
+}
+
 export default {
   name: "Gallery",
   props: {
@@ -47,13 +53,25 @@ export default {
   data() {
     return {
       category: "",
+      categories: [],
       images: [],
     };
+  },
+  methods: {
+    setImages: function (res) {
+      this.images = res.data.images;
+      console.log(`#images: ${this.images.length}`);
+      for (let index = 0; index < this.images.length; index++) {
+        const image = this.images[index];
+        this.categories.push(image.category);
+      }
+      this.categories = uniq(this.categories);
+    },
   },
   mounted: function () {
     axios
       .get("/imgs/image_list.json")
-      .then((response) => (this.images = response.data.images));
+      .then((response) => this.setImages(response));
   },
   computed: {
     filterByCategory: function () {
