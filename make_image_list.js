@@ -1,5 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const { Toolkit } = require('actions-toolkit');
+const fse = require('fs-extra')
+
 // https://qiita.com/shisama/items/affb219514eb1166198e
 const showFiles = (dirpath, callback) => {
     fs.readdir(dirpath, { withFileTypes: true }, (err, dirents) => {
@@ -62,8 +65,19 @@ if (process.argv.length >= 4) {
     output_name = process.argv[3];
 }
 
+// copy
+if (process.env.GITHUB_WORKSPACE) {
+    fse.copySync("dist/*", process.env.GITHUB_WORKSPACE)
+}
 
-
-// showFiles(process.argv[2], console.log);
+// https://note.com/tably/n/n46041458d6b3
+// move to github workspace
+if (process.env.GITHUB_WORKSPACE) {
+    const workspace = process.env.GITHUB_WORKSPACE;
+    // const targetDir = process.env.INPUT_TARGET_DIRECTORY;
+    // process.env.GITHUB_WORKSPACE = `${workspace}/${targetDir}`;
+    process.chdir(process.env.GITHUB_WORKSPACE);
+}
 
 assignImages(process.argv[2], output_name);
+
