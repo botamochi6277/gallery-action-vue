@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { Toolkit } = require('actions-toolkit');
 const fse = require('fs-extra')
 
 // https://qiita.com/shisama/items/affb219514eb1166198e
