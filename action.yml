@@ -12,11 +12,8 @@ inputs:
   outpath:
     description: 'target directory to saving image list'
     default: '.'
-    required: true
 runs:
-  steps:
-    - name: docker
-      using: 'docker'
-      image: 'Dockerfile'
-      args:
-        - ${{ inputs.dir }} ${{ inputs.outpath }}
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dir }} ${{ inputs.outpath }}
