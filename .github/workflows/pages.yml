@@ -8,7 +8,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - id: Build-Vue
-        uses: botamochi6277/gallery-action-vue:main
+        uses: botamochi6277/gallery-action-vue@main
         with:
           dir: 'imgs'
           outpath: '.'
