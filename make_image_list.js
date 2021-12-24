@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const fse = require('fs-extra')
+const fse = require('fs-extra');
+const core = require('@actions/core');
 
 // https://qiita.com/shisama/items/affb219514eb1166198e
 const showFiles = (dirpath, callback) => {
@@ -63,6 +64,13 @@ output_name = "output.json";
 if (process.argv.length >= 4) {
     output_name = process.argv[3];
     console.log(`output_name : ${output_name}`)
+}
+
+if (process.env.GITHUB_WORKSPACE) {
+    const dir = core.getInput('dir');
+    console.log(`Hello ${dir}!`);
+    const outpath = core.getInput('outpath');
+    console.log(`Hello ${outpath}!`);
 }
 
 // print ls for debug
