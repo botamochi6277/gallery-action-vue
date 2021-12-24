@@ -62,10 +62,17 @@ const assignImages = async (dirpath, output_path) => {
 output_name = "output.json";
 if (process.argv.length >= 4) {
     output_name = process.argv[3];
+    console.log(`output_name : ${output_name}`)
 }
+
+// print ls for debug
+showFiles('.', console.log);
+
 
 // copy
 if (process.env.GITHUB_WORKSPACE) {
+    console.log(`github workspace : ${process.env.GITHUB_WORKSPACE}`)
+
     fse.copySync("dist/*", process.env.GITHUB_WORKSPACE)
 }
 
